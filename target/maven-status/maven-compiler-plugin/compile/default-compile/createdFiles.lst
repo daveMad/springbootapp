@@ -1,0 +1,8 @@
+com\cool\Company.class
+com\cool\BeneficialOwnerRepository.class
+com\cool\HomeController.class
+com\cool\Beneficialowner.class
+com\cool\CompanyDto.class
+com\cool\CompanyRepository.class
+com\cool\CoolRestController.class
+com\cool\SocoolApplication.class

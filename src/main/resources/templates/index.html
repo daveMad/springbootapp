@@ -1,0 +1,304 @@
+<html ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Ng-Boot Sample</title>
+<style type="text/css">
+a.button {
+	background: #ECECEC;
+	border-radius: 15px;
+	padding: 4px 8px;
+	display: block;
+	font-family: arial;
+	font-weight: bold;
+	color: #7f7f7f;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #fff;
+	border: 1px solid #a7a7a7;
+	width: 145px;
+	margin: 0px auto;
+	margin-top: 5px;
+	box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px
+		rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+	-webkit-transition: box-shadow 0.5s;
+}
+
+a.button i {
+	float: right;
+	margin-top: 2px;
+}
+
+a.button:hover {
+	box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px
+		rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+}
+
+a.button:active {
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white,
+		0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+	background: -webkit-linear-gradient(top, #d1d1d1 0%, #ECECEC 100%);
+}
+
+div.selfpart {
+	margin-left: 5%
+}
+
+hr.style-one {
+	border: 0;
+	height: 1px;
+	background: #333;
+	background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+hr.style5 {
+	background-color: #fff;
+	border-top: 2px dashed #8c8b8b;
+}
+
+
+.wrapper {
+	border: 1px dashed #ddd;
+	box-shadow: 0 0 0 3px #fff, 0 0 0 5px #ddd, 0 0 0 10px #fff, 0 0 2px
+		10px #eee;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+</head>
+<body>
+	<div ng-controller="mainController">
+		
+		<br />
+		<button ng-click="showModal()" style="margin-left: 10%"
+			class="btn-info">Add new</button>
+
+		<!-- Alternative add panel here (not dialog but benefs will be dialog) -->
+		<div class="row" ng-show="showAddPanel" style="margin-left: 5%">
+			<div class="col-md-4">
+
+
+				<form ng-submit="addNewCompany()">
+					<div class="row">
+						<div class="col-md-4">Name :</div>
+						<div class="col-md-8">
+							<input type="text" required="required" placeholder="company name"
+								ng-model="newcompany.companyname" />
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">Adress :</div>
+						<div class="col-md-8">
+							<input type="text" required="required" placeholder="adress"
+								ng-model="newcompany.adress" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">City :</div>
+						<div class="col-md-8">
+							<input type="text" required="required" placeholder="city"
+								ng-model="newcompany.city" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">Country :</div>
+						<div class="col-md-8">
+							<input type="text" required="required" placeholder="country"
+								ng-model="newcompany.country" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">Email :</div>
+						<div class="col-md-8">
+							<input type="email" placeholder="email"
+								ng-model="newcompany.email" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">Phone :</div>
+						<div class="col-md-8">
+							<input type="tel" placeholder="phone" ng-model="newcompany.phone" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<input type="button" value="Add Beneficial Owner"
+								data-toggle="modal" data-target="#addPanel" />
+						</div>
+					</div>
+					<hr class="style-one" />
+					<!-- Submit form below -->
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-8">
+							<input type="submit" value="Add" />
+						</div>
+					</div>
+
+				</form>
+
+
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<h2>Beneficial Owners</h2>
+				</div>
+
+				<div class="row">
+					<hr class="style-one" />
+				</div>
+				<div class="row" ng-hide="ownerExists">
+					<h4>None</h4>
+				</div>
+
+				<div class="row" ng-repeat="nb in newbeneficialowners">{{nb}}
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="row">
+			<!-- Modal -->
+			<div id="addPanel" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Beneficial Owner</h4>
+						</div>
+						<div class="modal-body">
+							<form ng-submit="addOwner()">
+								<div class="row">
+									<div class="col-md-4">Owner Name :</div>
+									<div class="col-md-8">
+										<input type="text" required="required" ng-model="currentowner" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<input type="submit" value="Add" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row" style="margin-left: 5%" >
+			<div class="col-md-4">
+				<!-- Showing companies -->
+				<div ng-repeat="c in companies" class="wrapper"
+					style=" margin-top: 5%">
+					<div class="row selfpart">
+						<a href="#" class="button" ng-click="updateCompany(c)">Update
+							<i class="fa fa-pencil-square-o"></i>
+						</a>
+					</div>
+					<div class="row" style="" ng-show="updatecurrentcompany">
+						<form class="selfpart" ng-submit="updateSubmitCompany(c)">
+							<div class="row selfpart">
+								<div class="col-md-4">Company Name :</div>
+								<div class="col-md-8">
+									<input type="text" required="required" ng-model="c.companyname" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">Adress :</div>
+								<div class="col-md-8">
+									<input type="text" required="required" ng-model="c.adress" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">City :</div>
+								<div class="col-md-8">
+									<input type="text" required="required" ng-model="c.city" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">Country :</div>
+								<div class="col-md-8">
+									<input type="text" required="required" ng-model="c.country" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">Phone :</div>
+								<div class="col-md-8">
+									<input type="text" ng-model="c.phone" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">Email :</div>
+								<div class="col-md-8">
+									<input type="email" ng-model="c.email" />
+								</div>
+							</div>
+							<div class="row selfpart">
+								<div class="col-md-4">
+									<input type="submit" value="Update" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<hr class="style5" />
+					<div class="row selfpart" >
+						<div style="display: block;">Company Name :
+							{{c.companyname}}</div>
+					</div>
+					<div class="row selfpart">
+						<div style="display: block;">City : {{c.city}}</div>
+					</div>
+					<div class="row selfpart">
+						<div style="display: block;">Adress : {{c.adress}}</div>
+					</div>
+					<div class="row selfpart">
+						<div style="display: block;">Country : {{c.country}}</div>
+					</div>
+					<div class="row selfpart">
+						<div style="display: block;">Phone : {{c.phone}}</div>
+					</div>
+					<div class="row selfpart">
+						<div style="display: block;">Email : {{c.email}}</div>
+					</div>
+					<hr class="style-one" />
+					<h4>Beneficial Owners</h4>
+
+					<div ng-repeat="b in c.beneficialOwners" style="display: block;">
+						{{b}}</div>
+
+				</div>
+			</div>
+			<div class="col-md-8"></div>
+		</div>
+		<br /> <br /> <br />
+
+
+
+	</div>
+</body>
+</html>
