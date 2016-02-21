@@ -4,8 +4,8 @@ Demo
 ---
 [Live Working Application](https://fierce-refuge-75047.herokuapp.com/home)
 
-__Get All Companies__
--
+__Get All Companies__ --
+
 `curl https://fierce-refuge-75047.herokuapp.com/companies` 
 
 Add New Company
